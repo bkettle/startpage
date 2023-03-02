@@ -18,46 +18,38 @@ body {
 </style>
 
 <script>
-function doc_keyUp(e) {
-  switch(e.key) {
-    case '1':
-      console.log("pressed 1.");
-      document.getElementById("link-1").click()
-      break;
-    case '2':
-      console.log("pressed 2.");
-      document.getElementById("link-2").click()
-      break;
-    case 'n':
-      document.getElementById("link-n").click()
-      break;
-    case 'h':
-      document.getElementById("link-h").click()
-      break;
-    default:
-      console.log("other key pressed", e);
-      break;
-  }
-}
+  elem_map = {}
+  fetch("./shortcuts.json")
+    .then(response => response.json())
+    .then(data => 
+      data["shortcuts"].map(
+        ({key, name, link}) => {
+          const a = document.createElement("a");
+          const b = document.createElement("b");
+          b.appendChild(document.createTextNode(key));
+          a.appendChild(b); 
+          a.appendChild(document.createTextNode(`. ${name}`));
+          a.href = link;
+          a.classList.add("link");
+          document.getElementById("link-container").appendChild(a);
+          elem_map[key] = a;
+    }))
+    .catch(error => console.log(error));
 
-document.addEventListener('keyup', doc_keyUp, false);
+  function doc_keyUp(e) {
+    elem = elem_map[e.key];
+    if (elem) {
+      elem.click();
+    }
+  }
+  document.addEventListener('keyup', doc_keyUp, false);
 </script>
 </head>
 <body>
   Hi!
 
-  <a href="https://css.csail.mit.edu/6.5660/2023/" class="link" id="link-1">
-    <b>1</b>. 6.5660
-  </a>
-  <a href="https://pdos.csail.mit.edu/6.824/schedule.html" class="link" id="link-2">
-    <b>2</b>. 6.5840
-  </a>
-  <a href="https://naomben.com" class="link" id="link-n">
-    <b>n</b>. naomben.com
-  </a>
-  <a href="https://news.ycombinator.com" class="link" id="link-h">
-    <b>h</b>. HN
-  </a>
+  <div id="link-container">
+  </div>
 
   To focus the address bar, press Ctrl-L.
 </body>

@@ -1,0 +1,22 @@
+{"shortcuts": [
+  {
+    "key": "8",
+    "name": "6.5660",
+    "link": "https://css.csail.mit.edu/6.5660/2023/"
+  },
+  {
+    "key": "9",
+    "name": "6.5840",
+    "link": "https://pdos.csail.mit.edu/6.824/schedule.html"
+  },
+  {
+    "key": "n",
+    "name": "naomben.com",
+    "link": "https://naomben.com"
+  },
+  {
+    "key": "h",
+    "name": "hn",
+    "link": "https://news.ycombinator.com"
+  }
+]}
