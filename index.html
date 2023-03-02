@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+<style>
+body {
+  font-size: 18px;
+  margin: 20px;
+}
+.link {
+  padding: 10px;
+  margin: 10px;
+  border: 2px dashed darkgrey;
+  width: 200px;
+  display: block;
+  background-color: orange;
+  text-decoration: none;
+  color: black;
+}
+</style>
+
+<script>
+function doc_keyUp(e) {
+  switch(e.key) {
+    case '1':
+      console.log("pressed 1.");
+      document.getElementById("link-1").click()
+      break;
+    case '2':
+      console.log("pressed 2.");
+      document.getElementById("link-2").click()
+      break;
+    case 'n':
+      document.getElementById("link-n").click()
+      break;
+    case 'h':
+      document.getElementById("link-h").click()
+      break;
+    default:
+      console.log("other key pressed", e);
+      break;
+  }
+}
+
+document.addEventListener('keyup', doc_keyUp, false);
+</script>
+</head>
+<body>
+  Hi!
+
+  <a href="https://css.csail.mit.edu/6.5660/2023/" class="link" id="link-1">
+    <b>1</b>. 6.5660
+  </a>
+  <a href="https://pdos.csail.mit.edu/6.824/schedule.html" class="link" id="link-2">
+    <b>2</b>. 6.5840
+  </a>
+  <a href="https://naomben.com" class="link" id="link-n">
+    <b>n</b>. naomben.com
+  </a>
+  <a href="https://news.ycombinator.com" class="link" id="link-h">
+    <b>h</b>. HN
+  </a>
+
+  To focus the address bar, press Ctrl-L.
+</body>
