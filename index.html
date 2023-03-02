@@ -18,23 +18,47 @@ body {
 </style>
 
 <script>
+
+  SHORTCUTS = {"shortcuts": [
+                {
+                  "key": "8",
+                  "name": "6.5660",
+                  "link": "https://css.csail.mit.edu/6.5660/2023/"
+                },
+                {
+                  "key": "9",
+                  "name": "6.5840",
+                  "link": "https://pdos.csail.mit.edu/6.824/schedule.html"
+                },
+                {
+                  "key": "n",
+                  "name": "naomben.com",
+                  "link": "https://naomben.com"
+                },
+                {
+                  "key": "h",
+                  "name": "hn",
+                  "link": "https://news.ycombinator.com"
+                }
+              ]}
+
   elem_map = {}
-  fetch("./shortcuts.json")
-    .then(response => response.json())
-    .then(data => 
-      data["shortcuts"].map(
-        ({key, name, link}) => {
-          const a = document.createElement("a");
-          const b = document.createElement("b");
-          b.appendChild(document.createTextNode(key));
-          a.appendChild(b); 
-          a.appendChild(document.createTextNode(`. ${name}`));
-          a.href = link;
-          a.classList.add("link");
-          document.getElementById("link-container").appendChild(a);
-          elem_map[key] = a;
-    }))
-    .catch(error => console.log(error));
+
+  function setUpLinks() {
+    console.log(SHORTCUTS);
+    SHORTCUTS["shortcuts"].map(({key, name, link}) => {
+      const a = document.createElement("a");
+      const b = document.createElement("b");
+      b.appendChild(document.createTextNode(key));
+      a.appendChild(b); 
+      a.appendChild(document.createTextNode(`. ${name}`));
+      a.href = link;
+      a.classList.add("link");
+      document.getElementById("link-container").appendChild(a);
+      elem_map[key] = a;
+    });
+  }
+  window.addEventListener("load", setUpLinks);
 
   function doc_keyUp(e) {
     elem = elem_map[e.key];
@@ -43,6 +67,7 @@ body {
     }
   }
   document.addEventListener('keyup', doc_keyUp, false);
+
 </script>
 </head>
 <body>
